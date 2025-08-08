@@ -23,7 +23,7 @@ mongoose.connect(process.env.MONGO_URI, {
 app.use("/api/forms", formRoutes);
 
 app.get("/", (req, res) => {
-  res.send("API is working 🚀");
+  res.send("API is working 🚀");   //server running
 });
 
 app.listen(PORT, () => {
