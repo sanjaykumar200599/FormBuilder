@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Form } from "../types/form"; // Adjust based on your structure
 
-const API_URL = "http://localhost:5000/api/forms";
+const API_URL = "https://formbuilder-w78t.onrender.com/";
 
 export const saveForm = async (form: Form) => {
   const res = await axios.post(`${API_URL}`, form);
