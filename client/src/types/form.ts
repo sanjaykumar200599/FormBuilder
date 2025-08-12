@@ -7,20 +7,20 @@ export type QuestionType = "categorize" | "cloze" | "comprehension";
 export interface BaseQuestion {
   id: string;
   type: QuestionType;
-  questionText: string;
+  questionText: string; // still required in type, but we'll validate before save
 }
 
 // Specific question type: Categorize
 export interface CategorizeQuestion extends BaseQuestion {
   type: "categorize";
-  categories: string[];
+  categories: string[]; // optional in backend but here we default empty
   options: string[];
 }
 
 // Specific question type: Cloze
 export interface ClozeQuestion extends BaseQuestion {
   type: "cloze";
-  passage: string;
+  passage: string; // can be empty initially
   blanks: string[];
 }
 

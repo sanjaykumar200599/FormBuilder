@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import {
   Question,
-  //QuestionType,
   CategorizeQuestion,
   ClozeQuestion,
   ComprehensionQuestion,
+  Form,
 } from "../types/form";
 import { saveForm } from "../api/formApi";
 import HeaderImageUploader from "../components/FormEditor/HeaderImageUploader";
@@ -64,7 +64,25 @@ const Editor = () => {
   };
 
   const handleSave = async () => {
-    const form = {
+    // ✅ Frontend validation to prevent 400 from backend
+    if (!formTitle.trim()) {
+      alert("Form title is required");
+      return;
+    }
+
+    if (questions.length === 0) {
+      alert("Please add at least one question");
+      return;
+    }
+
+    for (const q of questions) {
+      if (!q.questionText.trim()) {
+        alert("Every question must have a question text");
+        return;
+      }
+    }
+
+    const form: Form = {
       title: formTitle,
       headerImage,
       questions,
@@ -74,6 +92,7 @@ const Editor = () => {
       const saved = await saveForm(form);
       alert("Form saved successfully! Form ID: " + saved._id);
     } catch (err) {
+      console.error("Save form error:", err);
       alert("Failed to save form.");
     }
   };
